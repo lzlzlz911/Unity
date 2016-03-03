@@ -17,7 +17,7 @@
 
             var methodinput = (Microsoft.Practices.Unity.InterceptionExtension.VirtualMethodInvocation) input;
 
-            Console.WriteLine(input.Target.ToString());
+            Console.WriteLine(input.Target);
             Console.WriteLine(input.MethodBase.Name);
 
             var xx = input.Inputs.Cast<object>().ToArray()[0].ToString();

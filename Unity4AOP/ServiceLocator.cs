@@ -31,8 +31,9 @@
 
             container.RegisterType<ITalk, Talk>(
                 new Interceptor<InterfaceInterceptor>(),
-                new InterceptionBehavior<ExceptionLoggingBehavior>(),
-                new InterceptionBehavior<CachingBehavior>());
+                new InterceptionBehavior<CachingBehavior>(),
+                new InterceptionBehavior<ExceptionLoggingBehavior>()
+                );
         }
         #endregion
 
