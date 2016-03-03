@@ -13,7 +13,18 @@
 
         public IMethodReturn Invoke(IMethodInvocation input, GetNextInterceptionBehaviorDelegate getNext){
             Console.WriteLine("CachingBehavior");
-            return getNext().Invoke(input, getNext);
+
+            var retvalue = getNext().Invoke(input, getNext);
+
+            if (null == retvalue.Exception){
+
+            }
+            else{
+                Console.WriteLine(retvalue.Exception.ToString());
+                retvalue.Exception = null;
+            }
+
+            return retvalue;
         }
 
         public bool WillExecute{

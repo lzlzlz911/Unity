@@ -11,6 +11,8 @@
             ITalk talk = ServiceLocator.Instance.GetService<ITalk>();
             talk.Speak("Hello");
 
+            Console.WriteLine("pandora");
+
             Console.ReadLine();
         }
 
