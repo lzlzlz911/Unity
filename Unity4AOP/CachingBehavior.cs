@@ -16,14 +16,6 @@
 
             var retvalue = getNext().Invoke(input, getNext);
 
-            if (null == retvalue.Exception){
-
-            }
-            else{
-                Console.WriteLine(retvalue.Exception.ToString());
-                retvalue.Exception = null;
-            }
-
             return retvalue;
         }
 

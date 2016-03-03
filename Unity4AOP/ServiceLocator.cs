@@ -2,12 +2,11 @@
     #region Using
     using System;
     using System.Collections.Generic;
-    using System.Configuration;
     using System.Linq;
     using System.Reflection;
 
     using Microsoft.Practices.Unity;
-    using Microsoft.Practices.Unity.Configuration;
+    using Microsoft.Practices.Unity.InterceptionExtension;
 
     #endregion
 
@@ -25,9 +24,15 @@
         ///   Initializes a new instance of <c>ServiceLocator</c> class.
         /// </summary>
         private ServiceLocator(){
-            UnityConfigurationSection section = (UnityConfigurationSection) ConfigurationManager.GetSection("unity");
+
             container = new UnityContainer();
-            section.Configure(container);
+
+            container.AddNewExtension<Interception>();
+
+            container.RegisterType<ITalk, Talk>(
+                new Interceptor<InterfaceInterceptor>(),
+                new InterceptionBehavior<ExceptionLoggingBehavior>(),
+                new InterceptionBehavior<CachingBehavior>());
         }
         #endregion
 
@@ -46,9 +51,7 @@
         /// </summary>
         /// <param name="serviceType">The type of the service.</param>
         /// <returns>The service instance.</returns>
-        public object GetService(Type serviceType){
-            return container.Resolve(serviceType);
-        }
+        public object GetService(Type serviceType) { return container.Resolve(serviceType); }
         #endregion
 
         #region Private Methods
@@ -73,9 +76,7 @@
         /// </summary>
         /// <typeparam name="T">The type of the service.</typeparam>
         /// <returns>The service instance.</returns>
-        public T GetService<T>(){
-            return container.Resolve<T>();
-        }
+        public T GetService<T>() { return container.Resolve<T>(); }
 
         /// <summary>
         ///   Gets the service instance with the given type by using the overrided arguments.
