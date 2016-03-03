@@ -33,6 +33,7 @@
                 new Interceptor<InterfaceInterceptor>(),
                 new InterceptionBehavior<ExceptionLoggingBehavior>(),
                 new InterceptionBehavior<CachingBehavior>());
+
         }
         #endregion
 
