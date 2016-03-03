@@ -27,12 +27,9 @@
 
             container = new UnityContainer();
 
-            container.AddNewExtension<Interception>();
+            container.AddNewExtension<AutoInterception>().AddNewExtension<Interception>().Configure<AutoInterception>().RegisterInterceptor(new InterfaceInterceptor());
 
-            container.RegisterType<ITalk, Talk>(
-                new Interceptor<InterfaceInterceptor>(),
-                new InterceptionBehavior<ExceptionLoggingBehavior>(),
-                new InterceptionBehavior<CachingBehavior>());
+            container.RegisterType<ITalk, Talk>();
 
         }
         #endregion
